@@ -7,7 +7,7 @@ const app = express();
 app.use(express.json());
 
 app.get("/", (req: Request, res: Response) => {
-  res.status(200).send('Hello Bamidele, we have successfully deployed to Google App Engine');
+  res.status(200).send('Testing 123, did it deploy ?');
 
   console.log('Serviced a request')
 });
