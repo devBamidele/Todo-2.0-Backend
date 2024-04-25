@@ -4,12 +4,19 @@
 
 
 export default {
-  Base: '/api',
-  Users: {
-    Base: '/users',
-    Get: '/all',
+
+  Task: {
+    Base: '/tasks',
+    GetAll: '/',
+    Get: '/:id',
     Add: '/add',
-    Update: '/update',
-    Delete: '/delete/:id',
+    Update: '/update/:id',
+    Delete: '/tasks/:id',
   },
+
+  Auth: {
+    Base: '/auth',
+    Login: '/login',
+    SignUp: '/register'
+  }
 } as const;

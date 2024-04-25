@@ -59,8 +59,7 @@ async function execute() {
 
 execute();
 
-
-export { ConnectionUri, JwtKey, RefreshToken }
+export { JwtKey, RefreshToken }
 
 
 

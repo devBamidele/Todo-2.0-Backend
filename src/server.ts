@@ -4,8 +4,9 @@ import helmet from "helmet";
 import 'express-async-errors';
 
 import Paths from "./constants/Paths";
-import BaseRouter from './routes/api';
+import TaskRouter from './routes/TaskRoute';
 import { ErrorHandler } from "./middleware/ErrorHandler";
+import AuthRouter from "./routes/AuthRoute";
 
 const app = express();
 
@@ -17,8 +18,8 @@ if (process.env.NODE_ENV === 'production') {
     app.use(helmet());
 }
 
-// Add APIs, must be after middleware
-app.use(Paths.Base, BaseRouter);
+app.use(Paths.Auth.Base, AuthRouter)
+app.use(Paths.Task.Base, TaskRouter);
 
 // Add error handler
 app.use(ErrorHandler)
