@@ -1,5 +1,4 @@
-
-import { ConnectionUri, JwtKey, RefreshToken } from '@src/pre-start';
+import { ConnectionUri, JwtKey, RefreshToken } from "../pre-start";
 import * as dotenv from 'dotenv';
 
 dotenv.config(); 

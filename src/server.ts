@@ -1,12 +1,10 @@
-import './pre-start';
-
 import express from "express";
 import helmet from "helmet";
 
 import 'express-async-errors';
 
 import Paths from "./constants/Paths";
-import BaseRouter from '@src/routes/api';
+import BaseRouter from '../src/routes/api';
 import { ErrorHandler } from "./middleware/ErrorHandler";
 
 const app = express();

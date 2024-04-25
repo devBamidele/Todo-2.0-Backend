@@ -13,7 +13,7 @@ export let RefreshToken: string | undefined;
 
 // Use only in production
 if (process.env.NODE_ENV === 'production') {
-    
+
     logger.info(" We're in production ")
 
     async function accessSecret(secretName: string) {
@@ -39,8 +39,15 @@ if (process.env.NODE_ENV === 'production') {
         ConnectionUri = await accessSecret('CONNECTION_URI');
         JwtKey = await accessSecret('JWT_KEY');
         RefreshToken = await accessSecret('REFRESH_TOKEN');
+
+        console.log(`
+            ConnectionUri: ${ConnectionUri} \n 
+            JwtKey: ${JwtKey} \n 
+            RefreshToken ${RefreshToken} 
+            `)
     })();
 }
 
-( async () => await openDbConnection() )
+const open = async () => await openDbConnection();
 
+open();

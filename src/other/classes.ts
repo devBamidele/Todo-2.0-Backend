@@ -2,7 +2,7 @@
  * Miscellaneous shared classes go here.
  */
 
-import HttpStatusCodes from "@src/middleware/HttpStatusCodes";
+import HttpStatusCodes from "../middleware/HttpStatusCodes";
 
 
 /**

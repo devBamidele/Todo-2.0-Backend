@@ -1,5 +1,5 @@
-import Paths from "@src/constants/Paths";
-import logger from "@src/utils/logger";
+import Paths from "../constants/Paths";
+import logger from "../utils/logger";
 import { Router, Request, Response } from "express";
 
 // **** Variables **** //

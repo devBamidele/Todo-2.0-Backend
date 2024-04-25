@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import HttpStatusCodes from './HttpStatusCodes';
-import { RouteError } from '@src/other/classes';
-import logger from '@src/utils/logger';
+import { RouteError } from '../other/classes';
+import logger from '../utils/logger';
 
 export const ErrorHandler = (
     err: Error,

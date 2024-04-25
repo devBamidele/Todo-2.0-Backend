@@ -1,6 +1,6 @@
 import './pre-start'; // Must be the first import
 
-import EnvVars from '@src/constants/EnvVars';
+import EnvVars from './constants/EnvVars';
 import server from './server';
 import logger from './utils/logger';
 

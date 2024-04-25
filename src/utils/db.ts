@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import EnvVars from '@src/constants/EnvVars';
+import EnvVars from '../constants/EnvVars';
 import logger from './logger';
 
 const openDbConnection = async () => {
