@@ -17,8 +17,17 @@
     ]
   },
   "dependencies": {
+    "@google-cloud/secret-manager": "^5.3.0",
     "bcrypt": "^5.1.1",
-    "express": "^4.19.2"
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-async-errors": "^3.1.1",
+    "helmet": "^7.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongodb": "^6.5.0",
+    "mongoose": "^8.3.2",
+    "winston": "^3.13.0",
+    "winston-mongodb": "^5.1.1"
   },
   "devDependencies": {
     "@types/express": "^4.17.21",

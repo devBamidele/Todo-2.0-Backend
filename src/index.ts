@@ -1,27 +1,12 @@
-import express, { Request, Response } from 'express';
+import './pre-start'; // Must be the first import
 
-const port = Number(process.env.PORT) || 8080;
+import EnvVars from '@src/constants/EnvVars';
+import server from './server';
+import logger from './utils/logger';
 
-const app = express();
+// **** Run **** //
 
-app.use(express.json());
+const SERVER_START_MSG = ('Server started on port: ' + 
+    EnvVars.Port.toString());
 
-app.get("/", (req: Request, res: Response) => {
-  res.status(200).send('Testing 123, did it deploy ?');
-
-  console.log('Serviced a request')
-});
-
-app.get("/ping", (req: Request, res: Response) => {
-  res.status(200).send({ success: true });
-});
-
-
-app.get("/toyin", (req: Request, res: Response) => {
-    res.status(200).send({ firstname : "Toyin", surname: "Ajewole" });
-  });
-
-  
-app.listen(port, () => {
-  console.log(`Server is listening on port ${port}`);
-});
+server.listen(EnvVars.Port, () => logger.info(SERVER_START_MSG));
