@@ -11,53 +11,56 @@ let JwtKey: string | undefined;
 let RefreshToken: string | undefined;
 
 
-// Use only in production
-if (process.env.NODE_ENV === 'production') {
+async function accessSecret(secretName: string) {
+    try {
+        const client = new SecretManagerServiceClient();
 
-    async function accessSecret(secretName: string) {
+        const name = `projects/${projectID}/secrets/${secretName}/versions/latest`;
 
-        try {
-            const client = new SecretManagerServiceClient();
+        const [version] = await client.accessSecretVersion({ name });
 
-            const name = `projects/${projectID}/secrets/${secretName}/versions/latest`;
+        return version.payload.data.toString('utf8');
 
-            const [version] = await client.accessSecretVersion({ name });
+    } catch (error) {
+        logger.error(`Error accessing secret ${secretName}:`, error);
 
-            return version.payload.data.toString('utf8');
-
-        } catch (error) {
-            logger.error(`Error accessing secret ${secretName}:`, error);
-
-            return undefined;
-        }
-
+        return undefined;
     }
-
-    async function initialize() {
-        try {
-            // Retrieve secrets
-            const [uri, jwtKey, refreshToken,] = await Promise.all([
-                accessSecret('CONNECTION_URI'),
-                accessSecret('JWT_KEY'),
-                accessSecret('REFRESH_TOKEN')
-            ]);
-
-            // Update values
-            ConnectionUri = uri;
-            JwtKey = jwtKey;
-            RefreshToken = refreshToken;
-
-        } catch (error) {
-            logger.error('Error:', error);
-        }
-    }
-
-    initialize();
 }
 
-export { ConnectionUri, JwtKey, RefreshToken }
+async function initialize() {
+    try {
+        // Retrieve secrets
+        const [uri, jwtKey, refreshToken,] = await Promise.all([
+            accessSecret('CONNECTION_URI'),
+            accessSecret('JWT_KEY'),
+            accessSecret('REFRESH_TOKEN')
+        ]);
 
-(async () => await openDbConnection(ConnectionUri))();
+        // Update values
+        ConnectionUri = uri;
+        JwtKey = jwtKey;
+        RefreshToken = refreshToken;
+
+    } catch (error) {
+        logger.error('Error:', error);
+    }
+}
+
+async function execute() {
+    // Use only in production
+    if (process.env.NODE_ENV === 'production') {
+        await initialize();
+    }
+
+    // Open Db connection
+    await openDbConnection(ConnectionUri)
+}
+
+execute();
+
+
+export { ConnectionUri, JwtKey, RefreshToken }
 
 
 
