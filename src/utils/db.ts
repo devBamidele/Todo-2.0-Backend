@@ -4,6 +4,9 @@ import logger from './logger';
 
 const openDbConnection = async () => {
     try {
+
+        logger.info(`The conection uri is ${EnvVars.ConnectionUri}`)
+
         await mongoose.connect(EnvVars.ConnectionUri);
 
         logger.info('Connected to MongoDB');

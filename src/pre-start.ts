@@ -36,11 +36,17 @@ if (process.env.NODE_ENV === 'production') {
 
     // Call the function to retrieve each secret
     (async () => {
+
+        logger.info('Before accessing all secrets')
         ConnectionUri = await accessSecret('CONNECTION_URI');
         JwtKey = await accessSecret('JWT_KEY');
         RefreshToken = await accessSecret('REFRESH_TOKEN');
 
+        logger.info('After accessing all secrets without opening connection')
+
         await openDbConnection();
+
+        logger.info('Accessed secrets and opened connection')
 
     })();
 }
