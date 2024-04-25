@@ -48,6 +48,7 @@ if (process.env.NODE_ENV === 'production') {
     })();
 }
 
-const open = async () => await openDbConnection();
+(async () => {
+    await openDbConnection();
+})();
 
-open();
