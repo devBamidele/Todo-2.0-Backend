@@ -40,15 +40,13 @@ if (process.env.NODE_ENV === 'production') {
         JwtKey = await accessSecret('JWT_KEY');
         RefreshToken = await accessSecret('REFRESH_TOKEN');
 
-        console.log(`
-            ConnectionUri: ${ConnectionUri} \n 
-            JwtKey: ${JwtKey} \n 
-            RefreshToken ${RefreshToken} 
-            `)
+        await openDbConnection();
+
     })();
 }
 
-(async () => {
-    await openDbConnection();
-})();
+if (process.env.NODE_ENV !== 'production') {
+    (async () => await openDbConnection())();
+}
+
 
