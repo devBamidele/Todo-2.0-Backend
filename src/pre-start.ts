@@ -34,21 +34,33 @@ if (process.env.NODE_ENV === 'production') {
 
     }
 
-    // Call the function to retrieve each secret
-    (async () => {
+    async function initialize() {
+        try {
+            // Retrieve CONNECTION_URI
+            const uri = await accessSecret('CONNECTION_URI');
+            ConnectionUri = uri;
+            logger.info(`The connection uri ${ConnectionUri}`);
+    
+            // Retrieve JWT_KEY and REFRESH_TOKEN in parallel
+            const [jwtKey, refreshToken] = await Promise.all([
+                accessSecret('JWT_KEY'),
+                accessSecret('REFRESH_TOKEN')
+            ]);
+            JwtKey = jwtKey;
+            RefreshToken = refreshToken;
 
-        logger.info('Before accessing all secrets')
-        ConnectionUri = await accessSecret('CONNECTION_URI');
-        JwtKey = await accessSecret('JWT_KEY');
-        RefreshToken = await accessSecret('REFRESH_TOKEN');
 
-        logger.info('After accessing all secrets without opening connection')
-
-        await openDbConnection();
-
-        logger.info('Accessed secrets and opened connection')
-
-    })();
+            logger.info(`The JWT key ${JwtKey}`);
+            logger.info(`The Refresh Token ${RefreshToken}`);
+    
+            // Open DB connection
+            await openDbConnection();
+        } catch (error) {
+            logger.error('Error:', error);
+        }
+    }
+    
+    initialize();
 }
 
 if (process.env.NODE_ENV !== 'production') {
