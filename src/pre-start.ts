@@ -6,15 +6,13 @@ const { SecretManagerServiceClient } = require('@google-cloud/secret-manager');
 const projectID = 'todo-app-gcp';
 
 // Exported variables
-export let ConnectionUri: string | undefined;
-export let JwtKey: string | undefined;
-export let RefreshToken: string | undefined;
+let ConnectionUri: string | undefined;
+let JwtKey: string | undefined;
+let RefreshToken: string | undefined;
 
 
 // Use only in production
 if (process.env.NODE_ENV === 'production') {
-
-    logger.info(" We're in production ")
 
     async function accessSecret(secretName: string) {
 
@@ -29,6 +27,7 @@ if (process.env.NODE_ENV === 'production') {
 
         } catch (error) {
             logger.error(`Error accessing secret ${secretName}:`, error);
+
             return undefined;
         }
 
@@ -36,35 +35,29 @@ if (process.env.NODE_ENV === 'production') {
 
     async function initialize() {
         try {
-            // Retrieve CONNECTION_URI
-            const uri = await accessSecret('CONNECTION_URI');
-            ConnectionUri = uri;
-            logger.info(`The connection uri ${ConnectionUri}`);
-    
-            // Retrieve JWT_KEY and REFRESH_TOKEN in parallel
-            const [jwtKey, refreshToken] = await Promise.all([
+            // Retrieve secrets
+            const [uri, jwtKey, refreshToken,] = await Promise.all([
+                accessSecret('CONNECTION_URI'),
                 accessSecret('JWT_KEY'),
                 accessSecret('REFRESH_TOKEN')
             ]);
+
+            // Update values
+            ConnectionUri = uri;
             JwtKey = jwtKey;
             RefreshToken = refreshToken;
 
-
-            logger.info(`The JWT key ${JwtKey}`);
-            logger.info(`The Refresh Token ${RefreshToken}`);
-    
-            // Open DB connection
-            await openDbConnection();
         } catch (error) {
             logger.error('Error:', error);
         }
     }
-    
+
     initialize();
 }
 
-if (process.env.NODE_ENV !== 'production') {
-    (async () => await openDbConnection())();
-}
+export { ConnectionUri, JwtKey, RefreshToken }
+
+(async () => await openDbConnection(ConnectionUri))();
+
 
 
