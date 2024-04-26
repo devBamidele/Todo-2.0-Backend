@@ -48,7 +48,8 @@ async function initialize() {
     }
 }
 
-async function execute() {
+// Switched to IIFE
+(async () => {
     // Use only in production
     if (process.env.NODE_ENV === 'production') {
         await initialize();
@@ -56,9 +57,7 @@ async function execute() {
 
     // Open Db connection
     await openDbConnection();
-}
-
-execute();
+})();
 
 
 

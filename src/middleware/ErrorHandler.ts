@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import HttpStatusCodes from './HttpStatusCodes';
+import HttpStatusCodes from '../constants/HttpStatusCodes';
 import { RouteError } from '../other/classes';
 import logger from '../utils/logger';
 

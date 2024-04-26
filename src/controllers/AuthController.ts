@@ -2,7 +2,7 @@
 // **** Functions **** //
 
 import { Request, Response } from "express";
-import HttpStatusCodes from "../middleware/HttpStatusCodes";
+import HttpStatusCodes from "../constants/HttpStatusCodes";
 import AuthService from "../services/AuthService";
 
 /**

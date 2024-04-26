@@ -5,8 +5,7 @@ import UserRepo from "../repos/UserRepo";
 async function registerUser(req: Request) {
     const { name, email, password } = req.body;
 
-    const salt = await bcrypt.genSalt();
-    const hashed = await bcrypt.hash(password, salt);
+    const hashed = await bcrypt.hash(password, 10);
 
     return UserRepo.addUser(name, email, hashed);
 }
