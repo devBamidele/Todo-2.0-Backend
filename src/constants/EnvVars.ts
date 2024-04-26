@@ -1,26 +1,22 @@
 import * as dotenv from 'dotenv';
-import logger from "../utils/logger";
 
 dotenv.config(); 
 
 let JwtKey = '';
 let RefreshToken = '';
+let ConnectionUri = '';
 
-export const setJwtKey = (value: string) => {
-    JwtKey = value;
+export const setJwtKey = (JwtKey: string) => JwtKey;
 
-    logger.info(`Updated the value of Jwt.key ${JwtKey}`);
-};
+export const setRefreshToken = (RefreshToken: string) => RefreshToken;
 
-export const setRefreshToken = (value: string) => {
-    RefreshToken = value;
+export const setConnectionUri = (ConnectionUri: string) => ConnectionUri;
 
-    logger.info(`Updated the value of Jwt.Refresh ${RefreshToken}`)
-};
-
-let EnvVars = {
+const EnvVars = {
     Port: process.env.PORT ?? 8080,
-    ConnectionUri: process.env.CONNECTION_URI ?? '',
+    get ConnectionUri() {
+        return process.env.CONNECTION_URI ?? ConnectionUri;
+    },
     get Jwt() {
         return {
             key: process.env.JWT_KEY ?? JwtKey,

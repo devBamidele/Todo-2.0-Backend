@@ -10,7 +10,7 @@ import AuthService from "../services/AuthService";
  */
 async function signUp(_: Request, res: Response) {
     const user = await AuthService.registerUser(_);
-    return res.status(HttpStatusCodes.OK).json(user.res)
+    return res.status(HttpStatusCodes.OK).json(user.token)
 }
 
 export default {

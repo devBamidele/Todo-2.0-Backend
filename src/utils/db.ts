@@ -2,10 +2,9 @@ import mongoose from 'mongoose';
 import EnvVars from '../constants/EnvVars';
 import logger from './logger';
 
-const openDbConnection = async (connect? : string) => {
+const openDbConnection = async () => {
     try {
-
-        await mongoose.connect( connect ?? EnvVars.ConnectionUri);
+        await mongoose.connect(EnvVars.ConnectionUri);
 
         logger.info('Connected to MongoDB');
 

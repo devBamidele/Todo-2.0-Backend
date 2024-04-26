@@ -1,4 +1,4 @@
-import { setJwtKey, setRefreshToken } from "./constants/EnvVars";
+import { setConnectionUri, setJwtKey, setRefreshToken } from "./constants/EnvVars";
 import { openDbConnection } from "./utils/db";
 import logger from "./utils/logger";
 
@@ -39,7 +39,7 @@ async function initialize() {
         ]);
 
         // Update values
-        ConnectionUri = uri;
+        setConnectionUri(uri);
         setJwtKey(jwtKey);
         setRefreshToken(refreshToken);
 
@@ -55,7 +55,7 @@ async function execute() {
     }
 
     // Open Db connection
-    await openDbConnection(ConnectionUri)
+    await openDbConnection();
 }
 
 execute();

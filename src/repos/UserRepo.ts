@@ -11,9 +11,9 @@ async function addUser(name: string, email: string, password: string) {
 
     const res = _.pick(user, ['_id', 'name', 'email']);
 
-    user.generateToken();
+    const token = user.generateToken();
 
-    return { res };
+    return { token };
 }
 
 export default {
