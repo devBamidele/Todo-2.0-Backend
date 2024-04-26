@@ -10,7 +10,7 @@ export const ErrorHandler = (
     __: NextFunction
 ) => {
 
-    logger.error(err)
+    logger.error(`Error`, err.message)
 
     let status = HttpStatusCodes.BAD_REQUEST;
     if (err instanceof RouteError) {
