@@ -21,7 +21,7 @@ userSchema.methods.generateToken = function () {
 
   logger.info(`JwtKey: ${EnvVars.Jwt.key}, RefreshToken: ${EnvVars.Jwt.Refresh}`);
 
-  logger.info(` Prestart values:: JwtKey: ${JwtKey}, RefreshToken: ${RefreshToken}`);
+  logger.info(`Prestart values:: JwtKey: ${JwtKey}, RefreshToken: ${RefreshToken}`);
 
   //return jwt.sign({ _id: this.id }, EnvVars.Jwt.key);
 }

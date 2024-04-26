@@ -1,3 +1,4 @@
+import { setJwtKey, setRefreshToken } from "./constants/EnvVars";
 import { openDbConnection } from "./utils/db";
 import logger from "./utils/logger";
 
@@ -39,8 +40,8 @@ async function initialize() {
 
         // Update values
         ConnectionUri = uri;
-        JwtKey = jwtKey;
-        RefreshToken = refreshToken;
+        setJwtKey(jwtKey);
+        setRefreshToken(refreshToken);
 
     } catch (error) {
         logger.error('Error:', error);

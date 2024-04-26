@@ -1,23 +1,26 @@
-import { JwtKey, RefreshToken } from "../pre-start";
 import * as dotenv from 'dotenv';
 import logger from "../utils/logger";
 
 dotenv.config(); 
 
-function checker(){
-    logger.info(`Check if the data from prestart is actually gotten `);
-    logger.info(`JwtKey: ${JwtKey}, RefreshToken: ${RefreshToken}`);
-}
+let JwtKey = '';
+let RefreshToken = '';
 
-if (process.env.NODE_ENV === 'production') {
-    checker();
-}
+export const setJwtKey = (value: string) => {
+    JwtKey = value;
+};
 
-export default {
-    Port : (process.env.PORT ?? 8080),
-    ConnectionUri : (process.env.CONNECTION_URI ?? ''),
-    Jwt : {
-        key : (process.env.JWT_KEY ?? JwtKey ?? ''),
-        Refresh : (process.env.REFRESH_TOKEN ?? RefreshToken)
+export const setRefreshToken = (value: string) => {
+    RefreshToken = value;
+};
+
+const EnvVars = {
+    Port: process.env.PORT ?? 8080,
+    ConnectionUri: process.env.CONNECTION_URI ?? '',
+    Jwt: {
+        key: process.env.JWT_KEY ?? JwtKey,
+        Refresh: process.env.REFRESH_TOKEN ?? RefreshToken
     }
 } as const;
+
+export default EnvVars;
