@@ -2,6 +2,8 @@ import { Schema, model, Document } from "mongoose";
 import jwt from 'jsonwebtoken';
 import EnvVars from "../constants/EnvVars";
 import logger from "../utils/logger";
+import getEnvVars from "../constants/EnvVars";
+
 
 export interface User extends Document {
   name: string,

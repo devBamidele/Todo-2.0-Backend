@@ -18,13 +18,15 @@ export const setRefreshToken = (value: string) => {
     logger.info(`Updated the value of Jwt.Refresh ${RefreshToken}`)
 };
 
-const EnvVars = {
+let EnvVars = {
     Port: process.env.PORT ?? 8080,
     ConnectionUri: process.env.CONNECTION_URI ?? '',
-    Jwt: {
-        key: process.env.JWT_KEY ?? JwtKey,
-        Refresh: process.env.REFRESH_TOKEN ?? RefreshToken
+    get Jwt() {
+        return {
+            key: process.env.JWT_KEY ?? JwtKey,
+            Refresh: process.env.REFRESH_TOKEN ?? RefreshToken
+        };
     }
-} as const;
+};
 
 export default EnvVars;
