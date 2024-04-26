@@ -8,10 +8,14 @@ let RefreshToken = '';
 
 export const setJwtKey = (value: string) => {
     JwtKey = value;
+
+    logger.info(`Updated the value of Jwt.key ${JwtKey}`);
 };
 
 export const setRefreshToken = (value: string) => {
     RefreshToken = value;
+
+    logger.info(`Updated the value of Jwt.Refresh ${RefreshToken}`)
 };
 
 const EnvVars = {

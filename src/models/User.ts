@@ -2,7 +2,6 @@ import { Schema, model, Document } from "mongoose";
 import jwt from 'jsonwebtoken';
 import EnvVars from "../constants/EnvVars";
 import logger from "../utils/logger";
-import { JwtKey, RefreshToken } from "../pre-start";
 
 export interface User extends Document {
   name: string,
@@ -21,7 +20,7 @@ userSchema.methods.generateToken = function () {
 
   logger.info(`JwtKey: ${EnvVars.Jwt.key}, RefreshToken: ${EnvVars.Jwt.Refresh}`);
 
-  logger.info(`Prestart values:: JwtKey: ${JwtKey}, RefreshToken: ${RefreshToken}`);
+  // logger.info(`Prestart values:: JwtKey: ${JwtKey}, RefreshToken: ${RefreshToken}`);
 
   //return jwt.sign({ _id: this.id }, EnvVars.Jwt.key);
 }
