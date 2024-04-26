@@ -1,16 +1,17 @@
 import * as dotenv from 'dotenv';
+import logger from "../utils/logger";
 
-dotenv.config(); 
+dotenv.config();
 
 let JwtKey = '';
 let RefreshToken = '';
 let ConnectionUri = '';
 
-export const setJwtKey = (JwtKey: string) => JwtKey;
+export const setJwtKey = (value: string) => { JwtKey = value };
 
-export const setRefreshToken = (RefreshToken: string) => RefreshToken;
+export const setRefreshToken = (value: string) => { RefreshToken = value };
 
-export const setConnectionUri = (ConnectionUri: string) => ConnectionUri;
+export const setConnectionUri = (value: string) => { ConnectionUri = value };
 
 const EnvVars = {
     Port: process.env.PORT ?? 8080,
