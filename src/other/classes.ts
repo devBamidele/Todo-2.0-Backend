@@ -17,3 +17,13 @@ export class RouteError extends Error {
     this.status = status;
   }
 }
+
+export class RequestError extends Error {
+
+  public status: HttpStatusCodes;
+
+  public constructor(status: HttpStatusCodes, message: string) {
+    super(message);
+    this.status = status;
+  }
+}

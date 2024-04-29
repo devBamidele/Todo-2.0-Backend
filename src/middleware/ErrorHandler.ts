@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import HttpStatusCodes from '../constants/HttpStatusCodes';
-import { RouteError } from '../other/classes';
+import { RequestError, RouteError } from '../other/classes';
 import logger from '../utils/logger';
 
 export const ErrorHandler = (
@@ -10,11 +10,13 @@ export const ErrorHandler = (
     __: NextFunction
 ) => {
 
-    logger.error(`Error`, err.message)
+    logger.error(err.message)
 
     let status = HttpStatusCodes.BAD_REQUEST;
     if (err instanceof RouteError) {
         status = err.status;
+    } else if(err instanceof RequestError){
+        status = err.status
     }
 
     return res.status(status).json({ error: err.message });
