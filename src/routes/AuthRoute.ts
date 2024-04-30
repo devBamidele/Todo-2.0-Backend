@@ -1,7 +1,7 @@
 import { Router, Request, Response } from "express";
 import Paths from "../constants/Paths";
 import AuthController from "../controllers/AuthController";
-import { validateLogin, validateSignUp } from "../middleware/Validation";
+import { validateLogin, validateSignUp } from "../middleware/auth/validateAuth";
 
 
 // ** Add AuthRouter ** //
@@ -15,5 +15,3 @@ authRouter.post(Paths.Auth.Login, validateLogin, AuthController.login);
 // **** Export default **** //
 
 export default authRouter;
-
-

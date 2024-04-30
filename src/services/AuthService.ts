@@ -4,6 +4,7 @@ import UserRepo from "../repos/UserRepo";
 import { RequestError } from "../other/classes";
 import HttpStatusCodes from "../constants/HttpStatusCodes";
 import ErrorMessages from "../constants/ErrorMessages";
+import Refresh from "../schemas/refreshSchema";
 
 async function registerUser(req: Request) {
     const { name, email, password } = req.body;
@@ -21,7 +22,6 @@ async function registerUser(req: Request) {
 
 async function loginUser(req: Request) {
     const { email, password } = req.body;
-
     const { exists, user } = await UserRepo.userExists(email);
 
     if (!exists || user == null) {
@@ -30,7 +30,19 @@ async function loginUser(req: Request) {
 
     const valid = await bcrypt.compare(password, user.password);
 
-    return { valid }
+    if (!valid) {
+        throw new RequestError(HttpStatusCodes.UNAUTHORIZED, ErrorMessages.INVALID_CREDENTIALS);
+    }
+
+    const token = user.generateToken();
+    const refresh = user.generateRefresh();
+
+    const rshHash = await bcrypt.hash(refresh, 10);
+
+    // Store the refresh token in mongodb
+    await Refresh.create({ rshHash, userId: user._id });
+
+    return { token, refresh };
 }
 
 

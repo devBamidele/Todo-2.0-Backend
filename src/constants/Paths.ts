@@ -7,11 +7,11 @@ export default {
 
   Task: {
     Base: '/tasks',
-    GetAll: '/',
+    GetAll: '/all',
     Get: '/:id',
     Add: '/add',
     Update: '/update/:id',
-    Delete: '/tasks/:id',
+    Delete: '/:id',
   },
 
   Auth: {

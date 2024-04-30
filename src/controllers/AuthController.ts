@@ -10,17 +10,20 @@ import AuthService from "../services/AuthService";
  */
 async function signUp(_: Request, res: Response) {
     const result = await AuthService.registerUser(_);
-    return res.status(HttpStatusCodes.OK).json(result)
+    res.status(HttpStatusCodes.OK).json(result).send()
 }
 
 /*
 * Login a user
 */
-async function login(_:Request, res: Response) {
-    const result = await AuthService.loginUser(_);
-    return res.status(HttpStatusCodes.OK).json(result)
-
+async function login(_: Request, res: Response) {
+    const { token, refresh } = await AuthService.loginUser(_);
+    return res.status(HttpStatusCodes.OK)
+        .header('authorization', token)
+        .header('refresh-token', refresh)
+        .json({ message: "Login successful" });
 }
+
 
 export default {
     signUp,

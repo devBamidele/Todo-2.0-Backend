@@ -1,13 +1,10 @@
-import UserModel, { User } from "../models/User";
-import { sendEmail } from "../utils/mailer";
+import UserModel from "../schemas/userSchema";
 import { getCode } from "../utils/misc";
 
 async function addUser(name: string, email: string, password: string) {
     const verification = getCode();
 
-    const user = new UserModel({ name, email, password, verification });
-
-    await user.save();
+    await UserModel.create({ name, email, password, verification })
 
     // sendEmail();
 

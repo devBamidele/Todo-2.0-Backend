@@ -1,5 +1,6 @@
 import { Timestamp } from "mongodb";
-import { Verify } from "../models/User";
+import { Verify } from "../models/interfaces";
+
 
 function getDuration(minutes = 0, hours = 0): Date {
     const now = Math.floor(Date.now() / 1000);
