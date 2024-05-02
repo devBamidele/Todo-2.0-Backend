@@ -6,12 +6,6 @@ const { SecretManagerServiceClient } = require('@google-cloud/secret-manager');
 
 const projectID = 'todo-app-gcp';
 
-// Exported variables
-let ConnectionUri: string | undefined;
-let JwtKey: string | undefined;
-let RefreshToken: string | undefined;
-
-
 async function accessSecret(secretName: string) {
     try {
         const client = new SecretManagerServiceClient();

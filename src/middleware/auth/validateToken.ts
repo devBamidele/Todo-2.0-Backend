@@ -1,10 +1,12 @@
 
-import { Response, NextFunction } from 'express';
+import { Response, NextFunction, Request } from 'express';
 import HttpStatusCodes from '../../constants/HttpStatusCodes';
 import ErrorMessages from '../../constants/ErrorMessages';
 import jwt from "jsonwebtoken";
 import EnvVars from '../../constants/EnvVars';
 import { IReq, IUser, Todo } from '../../models/interfaces';
+import { isIUser } from '../../utils/misc';
+import { RequestError } from '../../other/classes';
 
 
 const validateToken = (
@@ -27,7 +29,11 @@ const validateToken = (
                 .send(ErrorMessages.INVALID_TOKEN);
         }
 
-        req.user = decoded as IUser;
+        if (!isIUser(decoded)) {
+            throw new RequestError(HttpStatusCodes.BAD_REQUEST, ErrorMessages.MISSING_USER_DATA);
+        }
+
+        req.user = decoded;
 
         next();
     });

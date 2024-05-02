@@ -13,7 +13,7 @@ const userSchema = new Schema({
 userSchema.methods.generateToken = function () {
   const { id, name, email } = this;
 
-  return jwt.sign({ id, name, email }, EnvVars.Jwt.key, { expiresIn: '30m' });
+  return jwt.sign({ id, name, email }, EnvVars.Jwt.key, { expiresIn: '3h' });
 }
 
 userSchema.methods.generateRefresh = function () {

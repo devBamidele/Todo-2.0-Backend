@@ -1,5 +1,5 @@
 import { Timestamp } from "mongodb";
-import { Verify } from "../models/interfaces";
+import { IUser, Verify } from "../models/interfaces";
 
 
 function getDuration(minutes = 0, hours = 0): Date {
@@ -20,4 +20,14 @@ export const getCode = (): Verify => {
         code: genCode(),
         expiresAt: getDuration(5),
     }
+}
+
+// Type guard function to check if an object conforms to IUser interface
+export function isIUser(obj: any): obj is IUser {
+    return (
+        typeof obj === 'object' &&
+        'id' in obj && 
+        'name' in obj && 
+        'email' in obj 
+    );
 }
