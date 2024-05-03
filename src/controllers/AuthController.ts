@@ -4,6 +4,7 @@
 import { Request, Response } from "express";
 import HttpStatusCodes from "../constants/HttpStatusCodes";
 import AuthService from "../services/AuthService";
+import { IReq, Login } from "../models/interfaces";
 
 /**
  * Register a user
@@ -16,7 +17,7 @@ async function signUp(_: Request, res: Response) {
 /*
 * Login a user
 */
-async function login(_: Request, res: Response) {
+async function login(_: IReq<Login>, res: Response) {
     const { token, refresh } = await AuthService.loginUser(_);
     return res.status(HttpStatusCodes.OK)
         .header('authorization', token)

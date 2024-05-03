@@ -5,10 +5,13 @@ import { User } from "../models/interfaces";
 
 const userSchema = new Schema({
   name: { type: String, minlength: 3, maxlength: 50, required: true },
-  email: { type: String, unique: true, required: true },
+  email: { type: String, unique: true, required: true, lowercase: true },
   password: { type: String, required: true },
   verification: { type: Object, requireed: true },
 });
+
+// Create a case-insensitive index on the email field
+userSchema.index({ email: 1 }, { unique: true, collation: { locale: 'en', strength: 2 } });
 
 userSchema.methods.generateToken = function () {
   const { id, name, email } = this;

@@ -5,6 +5,7 @@ import { RequestError } from "../other/classes";
 import HttpStatusCodes from "../constants/HttpStatusCodes";
 import ErrorMessages from "../constants/ErrorMessages";
 import Refresh from "../schemas/refreshSchema";
+import { IReq, Login } from "../models/interfaces";
 
 async function registerUser(req: Request) {
     const { name, email, password } = req.body;
@@ -20,7 +21,7 @@ async function registerUser(req: Request) {
     return UserRepo.addUser(name, email, hashed);
 }
 
-async function loginUser(req: Request) {
+async function loginUser(req: IReq<Login>) {
     const { email, password } = req.body;
     const { exists, user } = await UserRepo.userExists(email);
 
