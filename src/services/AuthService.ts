@@ -43,6 +43,12 @@ async function loginUser(req: IReq<Login>) {
     // Store the refresh token in mongodb
     await Refresh.create({ rshHash, userId: user._id });
 
+    const verified = user.verification.isVerified;
+
+    if(!verified) {
+        throw new RequestError(HttpStatusCodes.FORBIDDEN , ErrorMessages.USER_NOT_VERIFIED)
+    }
+
     return { token, refresh };
 }
 

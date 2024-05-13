@@ -25,8 +25,12 @@ enum ErrorMessages {
     /**
      * Error message indicating that user information is absent in the authentication token,
      */
-    MISSING_USER_DATA = "User information absent in authentication token"
+    MISSING_USER_DATA = "User information absent in authentication token",
 
+    /**
+     * Error message indicating that the user is not verified.
+     */
+    USER_NOT_VERIFIED = "User is not verified"
 }
 
 export default ErrorMessages;
