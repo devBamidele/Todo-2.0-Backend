@@ -18,11 +18,14 @@ async function signUp(_: Request, res: Response) {
 * Login a user
 */
 async function login(_: IReq<Login>, res: Response) {
-    const { token, refresh } = await AuthService.loginUser(_);
+    const { token, refresh, name, email } = await AuthService.loginUser(_);
     return res.status(HttpStatusCodes.OK)
-        .header('authorization', token)
-        .header('refresh-token', refresh)
-        .json({ message: "Login successful" });
+        .header('auth', token)
+        .header('refresh', refresh)
+        .json({
+            message: "Login successful",
+            data: { name, email }
+        });
 }
 
 

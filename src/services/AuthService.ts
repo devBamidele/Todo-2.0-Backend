@@ -45,11 +45,11 @@ async function loginUser(req: IReq<Login>) {
 
     const verified = user.verification.isVerified;
 
-    if(!verified) {
-        throw new RequestError(HttpStatusCodes.FORBIDDEN , ErrorMessages.USER_NOT_VERIFIED)
+    if (!verified) {
+        throw new RequestError(HttpStatusCodes.FORBIDDEN, ErrorMessages.USER_NOT_VERIFIED)
     }
 
-    return { token, refresh };
+    return { token, refresh, name: user.name, email: user.email };
 }
 
 
