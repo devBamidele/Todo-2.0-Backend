@@ -1,6 +1,5 @@
-import { setConnectionUri, setJwtKey, setRefreshToken } from "./constants/EnvVars";
-import { openDbConnection } from "./utils/db";
-import logger from "./utils/logger";
+import { setConnectionUri, setJwtKey, setRefreshToken } from "./constants";
+import { logger, openDbConnection } from "./utils";
 
 const { SecretManagerServiceClient } = require('@google-cloud/secret-manager');
 

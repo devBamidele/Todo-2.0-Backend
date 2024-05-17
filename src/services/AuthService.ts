@@ -2,10 +2,9 @@ import { Request } from "express"
 import bcrypt from 'bcrypt';
 import UserRepo from "../repos/UserRepo";
 import { RequestError } from "../other/classes";
-import HttpStatusCodes from "../constants/HttpStatusCodes";
-import ErrorMessages from "../constants/ErrorMessages";
 import Refresh from "../schemas/refreshSchema";
-import { IReq, Login } from "../models/interfaces";
+import { IReq, Login } from "../models";
+import { ErrorMessages, HttpStatusCodes } from "../constants";
 
 async function registerUser(req: Request) {
     const { name, email, password } = req.body;

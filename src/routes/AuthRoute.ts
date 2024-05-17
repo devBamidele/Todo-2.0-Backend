@@ -1,7 +1,7 @@
-import { Router, Request, Response } from "express";
-import Paths from "../constants/Paths";
+import { Router } from "express";
 import AuthController from "../controllers/AuthController";
 import { validateLogin, validateSignUp } from "../middleware/auth/validateAuth";
+import { Paths } from "../constants";
 
 
 // ** Add AuthRouter ** //

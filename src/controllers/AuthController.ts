@@ -2,9 +2,9 @@
 // **** Functions **** //
 
 import { Request, Response } from "express";
-import HttpStatusCodes from "../constants/HttpStatusCodes";
 import AuthService from "../services/AuthService";
 import { IReq, Login } from "../models/interfaces";
+import { HttpStatusCodes } from "../constants";
 
 /**
  * Register a user

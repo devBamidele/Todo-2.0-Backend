@@ -1,5 +1,5 @@
 import { JSONSchemaType } from "ajv"
-import { Register, Login, Todo } from "../models/interfaces";
+import { Register, Login, Todo } from "../models";
 
 const signupSchema: JSONSchemaType<Register> = {
     type: 'object',

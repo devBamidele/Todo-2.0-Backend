@@ -1,5 +1,7 @@
 import { Request } from 'express';
-import mongoose from 'mongoose';
+import mongoose, { Types } from 'mongoose';
+
+export type UserId = Types.ObjectId;
 
 export interface Login {
     email: string;

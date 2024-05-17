@@ -1,8 +1,8 @@
-import Paths from "../constants/Paths";
 import TaskController from "../controllers/TaskController";
 import { validateToken } from "../middleware/auth/validateToken";
 import { Router } from "express";
 import { validateAdd } from "../middleware/task/validateAdd";
+import { Paths } from "../constants";
 
 
 // ** Create router ** //

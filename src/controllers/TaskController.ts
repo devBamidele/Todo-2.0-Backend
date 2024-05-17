@@ -1,7 +1,8 @@
 import { Response } from "express";
 import { IReq, Todo } from "../models/interfaces";
 import TaskService from "../services/TaskService";
-import HttpStatusCodes from "../constants/HttpStatusCodes";
+import { HttpStatusCodes } from "../constants";
+
 
 async function getAll(_: IReq<Todo>, res: Response) {
     const result = await TaskService.getAll(_);

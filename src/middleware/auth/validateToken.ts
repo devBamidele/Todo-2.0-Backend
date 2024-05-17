@@ -1,12 +1,10 @@
 
-import { Response, NextFunction, Request } from 'express';
-import HttpStatusCodes from '../../constants/HttpStatusCodes';
-import ErrorMessages from '../../constants/ErrorMessages';
+import { Response, NextFunction } from 'express';
 import jwt from "jsonwebtoken";
-import EnvVars from '../../constants/EnvVars';
-import { IReq, IUser, Todo } from '../../models/interfaces';
-import { isIUser } from '../../utils/misc';
+import { IReq, Todo } from '../../models/interfaces';
 import { RequestError } from '../../other/classes';
+import { EnvVars, ErrorMessages, HttpStatusCodes } from '../../constants';
+import { isIUser } from '../../utils';
 
 
 const validateToken = (

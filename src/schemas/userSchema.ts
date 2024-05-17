@@ -1,7 +1,8 @@
-import { Schema, model, Document } from "mongoose";
+import { Schema, model } from "mongoose";
 import jwt from 'jsonwebtoken';
-import EnvVars from "../constants/EnvVars";
-import { User } from "../models/interfaces";
+import { EnvVars } from "../constants";
+import { User } from "../models";
+
 
 const userSchema = new Schema({
   name: { type: String, minlength: 3, maxlength: 50, required: true },
@@ -16,7 +17,7 @@ userSchema.index({ email: 1 }, { unique: true, collation: { locale: 'en', streng
 userSchema.methods.generateToken = function () {
   const { id, name, email } = this;
 
-  return jwt.sign({ id, name, email }, EnvVars.Jwt.key, { expiresIn: '3h' });
+  return jwt.sign({ id, name, email }, EnvVars.Jwt.key, { expiresIn: '30s' });
 }
 
 userSchema.methods.generateRefresh = function () {

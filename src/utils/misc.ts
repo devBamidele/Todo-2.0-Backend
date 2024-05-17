@@ -1,4 +1,3 @@
-import { Timestamp } from "mongodb";
 import { IUser, Verify } from "../models/interfaces";
 
 

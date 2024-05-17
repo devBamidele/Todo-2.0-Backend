@@ -1,5 +1,5 @@
 import mongoose, { Schema, model } from "mongoose";
-import { Task } from "../models/interfaces";
+import { Task } from "../models";
 
 const taskSchema = new Schema({
     userId: { type: mongoose.Types.ObjectId, required: true },

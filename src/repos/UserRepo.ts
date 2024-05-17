@@ -1,5 +1,5 @@
 import UserModel from "../schemas/userSchema";
-import { getCode } from "../utils/misc";
+import { getCode } from "../utils";
 
 async function addUser(name: string, email: string, password: string) {
     const verification = getCode();

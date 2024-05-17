@@ -3,10 +3,10 @@ import helmet from "helmet";
 
 import 'express-async-errors';
 
-import Paths from "./constants/Paths";
 import TaskRouter from './routes/TaskRoute';
 import { ErrorHandler } from "./middleware/ErrorHandler";
 import AuthRouter from "./routes/AuthRoute";
+import { Paths } from "./constants";
 
 const app = express();
 

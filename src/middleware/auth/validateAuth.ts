@@ -1,8 +1,8 @@
 import Ajv from 'ajv';
-import { Request, Response, NextFunction } from 'express';
-import HttpStatusCodes from '../../constants/HttpStatusCodes';
+import { Response, NextFunction } from 'express';
 import { signupSchema, loginSchema } from '../../schemas/validationSchema';
 import { IReq, Login } from '../../models/interfaces';
+import { HttpStatusCodes } from '../../constants';
 
 const ajv = new Ajv();
 const addFormats = require("ajv-formats");
