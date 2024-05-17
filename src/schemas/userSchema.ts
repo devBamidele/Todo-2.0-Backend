@@ -17,13 +17,19 @@ userSchema.index({ email: 1 }, { unique: true, collation: { locale: 'en', streng
 userSchema.methods.generateToken = function () {
   const { id, name, email } = this;
 
-  return jwt.sign({ id, name, email }, EnvVars.Jwt.key, { expiresIn: '30s' });
+  return getToken({ id, name, email }, '1m');
 }
 
 userSchema.methods.generateRefresh = function () {
   const { id, name, email } = this;
 
-  return jwt.sign({ id, name, email }, EnvVars.Jwt.Refresh);
+  return getToken({ id, name, email }, undefined, true);
+}
+
+export const getToken = (payload : object, expiresIn? : string, isRefresh?: boolean) => {
+  const secretKey = !!isRefresh ? EnvVars.Jwt.Refresh : EnvVars.Jwt.key;
+
+  return jwt.sign(payload, secretKey, { expiresIn });
 }
 
 const UserModel = model<User>('User', userSchema);

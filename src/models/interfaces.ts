@@ -1,5 +1,5 @@
 import { Request } from 'express';
-import mongoose, { Types } from 'mongoose';
+import { Types } from 'mongoose';
 
 export type UserId = Types.ObjectId;
 
@@ -26,7 +26,7 @@ export interface Todo {
 }
 
 export interface Task extends Document {
-    userId: mongoose.Types.ObjectId,
+    userId: UserId,
     title : string,
     description: string,
 }
@@ -41,7 +41,7 @@ export interface User extends Document {
 }
 
 export interface IUser {
-    id: mongoose.Types.ObjectId,
+    id: UserId,
     name: string,
     email: string,
 }

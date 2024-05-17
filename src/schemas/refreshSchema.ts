@@ -1,7 +1,7 @@
-import mongoose, { Schema, model } from "mongoose";
+import { Schema, Types, model } from "mongoose";
 
 const refreshSchema = new Schema({
-    userId: { type: mongoose.Types.ObjectId, required: true },
+    userId: { type: Types.ObjectId, required: true },
     rshHash: { type: String, unique: true, required: true },
 })
 

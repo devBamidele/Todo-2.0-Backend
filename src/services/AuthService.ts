@@ -3,8 +3,9 @@ import bcrypt from 'bcrypt';
 import UserRepo from "../repos/UserRepo";
 import { RequestError } from "../other/classes";
 import Refresh from "../schemas/refreshSchema";
-import { IReq, Login } from "../models";
+import { IReq, Login, UserId } from "../models";
 import { ErrorMessages, HttpStatusCodes } from "../constants";
+import { getToken } from "../schemas/userSchema";
 
 async function registerUser(req: Request) {
     const { name, email, password } = req.body;
@@ -52,7 +53,30 @@ async function loginUser(req: IReq<Login>) {
 }
 
 
+async function verifyRefreshToken(userId: UserId, token: string): Promise<boolean> {
+    const rshHashes = await Refresh.find({ userId });
+
+    for (const refresh of rshHashes) {
+        if (await bcrypt.compare(token, refresh.rshHash)) {
+            return true;
+        }
+    }
+
+    return false;
+};
+
+async function renewToken(_: IReq<string>): Promise<string> {
+
+    if (await verifyRefreshToken(_.user!.id, _.body)) {
+        return getToken({ ..._.user }, '1m');
+    }
+
+    throw new RequestError( HttpStatusCodes.UNAUTHORIZED, ErrorMessages.INVALID_REFRESH_TOKEN)
+}
+
+
 export default {
     registerUser,
     loginUser,
+    renewToken,
 } as const;

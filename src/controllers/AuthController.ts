@@ -3,7 +3,7 @@
 
 import { Request, Response } from "express";
 import AuthService from "../services/AuthService";
-import { IReq, Login } from "../models/interfaces";
+import { IReq, IUser, Login } from "../models/interfaces";
 import { HttpStatusCodes } from "../constants";
 
 /**
@@ -15,8 +15,8 @@ async function signUp(_: Request, res: Response) {
 }
 
 /*
-* Login a user
-*/
+ * Login a user
+ */
 async function login(_: IReq<Login>, res: Response) {
     const { token, refresh, name, email } = await AuthService.loginUser(_);
     return res.status(HttpStatusCodes.OK)
@@ -28,8 +28,20 @@ async function login(_: IReq<Login>, res: Response) {
         });
 }
 
+/*
+ * Refresh the access token
+ */
+async function refresh(_: IReq<string>, res: Response) {
+     const token =  await AuthService.renewToken(_);
+     return res.status(HttpStatusCodes.OK)
+        .header('auth', token)
+        .json({
+            message : "Access token created successfully"
+        })
+}
 
 export default {
     signUp,
-    login
+    login,
+    refresh,
 } as const;

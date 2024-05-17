@@ -2,8 +2,8 @@
 
 export { default as logger } from "./logger";
 
-export { openDbConnection, closeDbConnection } from "./db";
+export { openDbConnection, closeDbConnection, } from "./db";
 
 export { sendEmail } from "./mailer";
 
-export { getCode, isIUser } from "./misc"
+export { getCode, isIUser, hasId } from "./misc"

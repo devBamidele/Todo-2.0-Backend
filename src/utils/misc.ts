@@ -25,8 +25,8 @@ export const getCode = (): Verify => {
 export function isIUser(obj: any): obj is IUser {
     return (
         typeof obj === 'object' &&
-        'id' in obj && 
-        'name' in obj && 
-        'email' in obj 
+        'id' in obj &&
+        'name' in obj &&
+        'email' in obj
     );
 }

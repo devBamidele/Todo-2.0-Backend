@@ -23,14 +23,24 @@ enum ErrorMessages {
     INVALID_TOKEN = "The token provided is invalid",
 
     /**
-     * Error message indicating that user information is absent in the authentication token,
+     * Error message indicating that user information is absent in the authentication token.
      */
     MISSING_USER_DATA = "User information absent in authentication token",
 
     /**
      * Error message indicating that the user is not verified.
      */
-    USER_NOT_VERIFIED = "User is not verified"
+    USER_NOT_VERIFIED = "User is not verified",
+
+    /**
+     * Error message indicating that the refresh header is invalid or missing.
+     */
+    INVALID_REFRESH_HEADER = "Invalid or missing refresh header",
+
+
+    INVALID_REFRESH_TOKEN = "The refresh token provided is invalid",
+
+    MISSING_ID = "Id is absent in the refresh token"
 }
 
 export default ErrorMessages;
