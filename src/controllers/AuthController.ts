@@ -32,12 +32,10 @@ async function login(_: IReq<Login>, res: Response) {
  * Refresh the access token
  */
 async function refresh(_: IReq<string>, res: Response) {
-     const token =  await AuthService.renewToken(_);
-     return res.status(HttpStatusCodes.OK)
+    const token = await AuthService.renewToken(_);
+    return res.status(HttpStatusCodes.OK)
         .header('auth', token)
-        .json({
-            message : "Access token created successfully"
-        })
+        .json({ message: "Access token created successfully" })
 }
 
 export default {

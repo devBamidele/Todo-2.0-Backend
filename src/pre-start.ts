@@ -1,4 +1,5 @@
 import { setConnectionUri, setJwtKey, setRefreshToken } from "./constants";
+import { Secrets } from "./models";
 import { logger, openDbConnection } from "./utils";
 
 const { SecretManagerServiceClient } = require('@google-cloud/secret-manager');
@@ -25,10 +26,10 @@ async function accessSecret(secretName: string) {
 async function initialize() {
     try {
         // Retrieve secrets
-        const [uri, jwtKey, refreshToken,] = await Promise.all([
-            accessSecret('CONNECTION_URI'),
-            accessSecret('JWT_KEY'),
-            accessSecret('REFRESH_TOKEN')
+        const [uri, jwtKey, refreshToken] = await Promise.all([
+            accessSecret(Secrets.uri),
+            accessSecret(Secrets.jwt),
+            accessSecret(Secrets.refresh)
         ]);
 
         // Update values

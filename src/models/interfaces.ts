@@ -1,7 +1,5 @@
 import { Request } from 'express';
-import { Types } from 'mongoose';
-
-export type UserId = Types.ObjectId;
+import { UserId } from './types';
 
 export interface Login {
     email: string;
@@ -45,8 +43,6 @@ export interface IUser {
     name: string,
     email: string,
 }
-
-// **** Express **** //
 
 export interface IReq<T = void> extends Request {
     body: T;

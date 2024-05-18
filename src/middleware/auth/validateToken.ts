@@ -5,7 +5,7 @@ import AuthService from "../../services/AuthService";
 import { IReq, Todo } from '../../models/interfaces';
 import { RequestError } from '../../other/classes';
 import { EnvVars, ErrorMessages, HttpStatusCodes } from '../../constants';
-import { hasId, isIUser } from '../../utils';
+import { isIUser } from '../../utils';
 
 
 const validateToken = (
