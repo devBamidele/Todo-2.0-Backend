@@ -24,7 +24,7 @@ const validateToken = (
     jwt.verify(token, EnvVars.Jwt.key, (err, decoded) => {
         if (err) {
             return res
-                .status(HttpStatusCodes.FORBIDDEN)
+                .status(HttpStatusCodes.UNAUTHORIZED)
                 .send(ErrorMessages.INVALID_TOKEN);
         }
 

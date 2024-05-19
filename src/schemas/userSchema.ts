@@ -23,7 +23,7 @@ userSchema.methods.generateToken = function () {
 userSchema.methods.generateRefresh = function () {
   const { id, name, email } = this;
 
-  return getToken({ id, name, email }, undefined, true);
+  return getToken({ id, name, email }, '1y', true);
 }
 
 export const getToken = (payload : object, expiresIn? : string, isRefresh?: boolean) => {
