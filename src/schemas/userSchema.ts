@@ -3,6 +3,7 @@ import jwt from 'jsonwebtoken';
 import { EnvVars } from "../constants";
 import { User } from "../models";
 
+const secondsInAYear = 365 * 24 * 60 * 60;
 
 const userSchema = new Schema({
   name: { type: String, minlength: 3, maxlength: 50, required: true },
@@ -17,16 +18,16 @@ userSchema.index({ email: 1 }, { unique: true, collation: { locale: 'en', streng
 userSchema.methods.generateToken = function () {
   const { id, name, email } = this;
 
-  return getToken({ id, name, email }, '1m');
+  return getToken({ id, name, email}, '30s');
 }
 
 userSchema.methods.generateRefresh = function () {
   const { id, name, email } = this;
 
-  return getToken({ id, name, email }, '1y', true);
+  return getToken({ id, name, email}, '1y', true);
 }
 
-export const getToken = (payload : object, expiresIn? : string, isRefresh?: boolean) => {
+export const getToken = (payload: object, expiresIn: string, isRefresh?: boolean) => {
   const secretKey = !!isRefresh ? EnvVars.Jwt.Refresh : EnvVars.Jwt.key;
 
   return jwt.sign(payload, secretKey, { expiresIn });

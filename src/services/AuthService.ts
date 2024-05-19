@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt';
 import UserRepo from "../repos/UserRepo";
 import { RequestError } from "../other/classes";
 import Refresh from "../schemas/refreshSchema";
-import { IReq, Login, UserId } from "../models";
+import { IReq, IUser, Login, UserId } from "../models";
 import { ErrorMessages, HttpStatusCodes } from "../constants";
 import { getToken } from "../schemas/userSchema";
 
@@ -66,9 +66,13 @@ async function verifyRefreshToken(userId: UserId, token: string): Promise<boolea
 };
 
 async function renewToken(_: IReq<string>): Promise<string> {
+    const user = _.user as IUser
 
-    if (await verifyRefreshToken(_.user!.id, _.body)) {
-        return getToken({ ..._.user }, '1m');
+    if (await verifyRefreshToken(user.id, _.body)) {       
+
+        const { id, name, email } = user;
+
+        return getToken({ id, name, email }, '10m');
     }
 
     throw new RequestError( HttpStatusCodes.UNAUTHORIZED, ErrorMessages.INVALID_REFRESH_TOKEN)
