@@ -1,23 +1,23 @@
 import TaskController from "../controllers/TaskController";
-import { validateToken } from "../middleware/auth/validateToken";
-import { Router } from "express";
-import { validateAdd } from "../middleware/task/validateAdd";
+import { NextFunction, Request, Response, Router } from "express";
+import { validateAdd, validateTokenMiddleWare, validateUpdate } from "../middleware";
 import { Paths } from "../constants";
+import { Todo, UpdateTodo } from "../models";
 
 
 // ** Create router ** //
 
 const taskRouter = Router();
 
-taskRouter.get(Paths.Task.GetAll, validateToken, TaskController.getAll);
+taskRouter.get(Paths.Task.GetAll, validateTokenMiddleWare(), TaskController.getAll);
 
-taskRouter.get(Paths.Task.Get, validateToken, TaskController.get);
+taskRouter.get(Paths.Task.Get, validateTokenMiddleWare(), TaskController.get);
 
-taskRouter.post(Paths.Task.Add, [validateAdd, validateToken], TaskController.add);
+taskRouter.post(Paths.Task.Add, [validateAdd, validateTokenMiddleWare<Todo>()], TaskController.add);
 
-taskRouter.put(Paths.Task.Update, validateToken, TaskController.update);
+taskRouter.patch(Paths.Task.Update, [validateUpdate, validateTokenMiddleWare<UpdateTodo>()], TaskController.update);
 
-taskRouter.delete(Paths.Task.Delete, validateToken, TaskController.remove);
+taskRouter.delete(Paths.Task.Delete, validateTokenMiddleWare(), TaskController.remove);
 
 
 // **** Export default **** //

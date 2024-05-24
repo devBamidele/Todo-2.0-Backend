@@ -1,15 +1,14 @@
 
-import { Response, NextFunction } from 'express';
-import jwt, { decode } from "jsonwebtoken";
-import AuthService from "../../services/AuthService";
+import { Response, NextFunction, Request } from 'express';
+import jwt from "jsonwebtoken";
 import { IReq, Todo } from '../../models/interfaces';
 import { RequestError } from '../../other/classes';
 import { EnvVars, ErrorMessages, HttpStatusCodes } from '../../constants';
 import { isIUser } from '../../utils';
 
 
-const validateToken = (
-    req: IReq<Todo>,
+const validateToken = <T>(
+    req: IReq<T>,
     res: Response,
     next: NextFunction
 ) => {
@@ -65,8 +64,14 @@ const validateRefresh = (
         req.user = decoded;
         req.body = refresh;
 
-        next();  
+        next();
     })
 }
 
-export { validateToken, validateRefresh };
+// Higher-order function to create middleware
+const validateTokenMiddleWare = <T = void>() => {
+    return (req: Request, res: Response, next: NextFunction) =>
+        validateToken<T>(req as Request as IReq<T>, res, next);
+};
+
+export { validateTokenMiddleWare, validateRefresh };

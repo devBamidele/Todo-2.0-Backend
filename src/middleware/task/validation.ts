@@ -1,7 +1,7 @@
 import Ajv from 'ajv';
 import { Request, Response, NextFunction } from 'express';
-import HttpStatusCodes from '../../constants/HttpStatusCodes';
-import { addTaskSchema } from '../../schemas/validationSchema';
+import { HttpStatusCodes } from '../../constants';
+import { addTaskSchema, updateTaskSchema } from '../../schemas/validationSchema';
 
 const ajv = new Ajv();
 
@@ -19,7 +19,8 @@ const validation = (schema: object) => {
     };
 };
 
-
 const validateAdd = validation(addTaskSchema);
 
-export {validateAdd}
+const validateUpdate = validation(updateTaskSchema);
+
+export { validateAdd, validateUpdate }

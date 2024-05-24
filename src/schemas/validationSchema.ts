@@ -1,5 +1,6 @@
 import { JSONSchemaType } from "ajv"
-import { Register, Login, Todo } from "../models";
+import { Register, Login, Todo, UpdateTodo } from "../models";
+
 
 const signupSchema: JSONSchemaType<Register> = {
     type: 'object',
@@ -24,10 +25,21 @@ const loginSchema: JSONSchemaType<Login> = {
 const addTaskSchema: JSONSchemaType<Todo> = {
     type: 'object',
     properties: {
-        title: { type: 'string', maxLength: 100, },
+        _id: { type: 'string', nullable: true },
+        title: { type: 'string', maxLength: 100 },
         description: { type: 'string' }
     },
     required: ['title']
 }
 
-export { signupSchema, loginSchema, addTaskSchema }
+const updateTaskSchema: JSONSchemaType<UpdateTodo> = {
+    type: 'object',
+    properties: {
+        _id: { type: 'string' },
+        title: { type: 'string', maxLength: 100, nullable: true },
+        description: { type: 'string', nullable: true }
+    },
+    required: ['_id']
+}
+
+export { signupSchema, loginSchema, addTaskSchema, updateTaskSchema }

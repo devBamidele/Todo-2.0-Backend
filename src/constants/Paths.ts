@@ -10,7 +10,7 @@ export default {
     GetAll: '/all',
     Get: '/:id',
     Add: '/add',
-    Update: '/update/:id',
+    Update: '/update',
     Delete: '/:id',
   },
 

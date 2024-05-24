@@ -19,14 +19,21 @@ export interface Verify {
 }
 
 export interface Todo {
-    title : string,
+    _id?: string
+    title: string,
     description: string | null,
 }
 
 export interface Task extends Document {
     userId: UserId,
-    title : string,
+    title: string,
     description: string,
+}
+
+export interface UpdateTodo {
+    _id: string;
+    title?: string;
+    description?: string;
 }
 
 export interface User extends Document {

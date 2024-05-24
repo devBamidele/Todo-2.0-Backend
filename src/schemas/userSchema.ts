@@ -18,7 +18,7 @@ userSchema.index({ email: 1 }, { unique: true, collation: { locale: 'en', streng
 userSchema.methods.generateToken = function () {
   const { id, name, email } = this;
 
-  return getToken({ id, name, email}, '30s');
+  return getToken({ id, name, email}, '10m');
 }
 
 userSchema.methods.generateRefresh = function () {

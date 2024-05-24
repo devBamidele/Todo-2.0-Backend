@@ -72,7 +72,7 @@ async function renewToken(_: IReq<string>): Promise<string> {
 
         const { id, name, email } = user;
 
-        return getToken({ id, name, email }, '10m');
+        return getToken({ id, name, email }, '20m');
     }
 
     throw new RequestError( HttpStatusCodes.UNAUTHORIZED, ErrorMessages.INVALID_REFRESH_TOKEN)

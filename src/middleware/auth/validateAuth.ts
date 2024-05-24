@@ -1,7 +1,7 @@
 import Ajv from 'ajv';
 import { Response, NextFunction } from 'express';
 import { signupSchema, loginSchema } from '../../schemas/validationSchema';
-import { IReq, Login } from '../../models/interfaces';
+import { IReq, Login } from '../../models';
 import { HttpStatusCodes } from '../../constants';
 
 const ajv = new Ajv();
