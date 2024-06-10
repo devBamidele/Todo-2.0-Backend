@@ -11,7 +11,7 @@ import { HttpStatusCodes } from "../constants";
  */
 async function signUp(_: Request, res: Response) {
     const result = await AuthService.registerUser(_);
-    res.status(HttpStatusCodes.OK).json(result).send()
+    return res.status(HttpStatusCodes.OK).json(result);
 }
 
 /*

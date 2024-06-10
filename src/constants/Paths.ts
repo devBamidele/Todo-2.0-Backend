@@ -12,6 +12,7 @@ export default {
     Add: '/add',
     Update: '/update',
     Delete: '/:id',
+    Load: '/load'
   },
 
   Auth: {
