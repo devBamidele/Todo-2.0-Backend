@@ -1,7 +1,7 @@
 
 import { Response, NextFunction, Request } from 'express';
 import jwt from "jsonwebtoken";
-import { IReq, Todo } from '../../models/interfaces';
+import { IReq } from '../../models/interfaces';
 import { RequestError } from '../../other/classes';
 import { EnvVars, ErrorMessages, HttpStatusCodes } from '../../constants';
 import { isIUser } from '../../utils';

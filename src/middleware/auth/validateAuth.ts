@@ -1,7 +1,6 @@
 import Ajv from 'ajv';
-import { Response, NextFunction } from 'express';
-import { signupSchema, loginSchema } from '../../schemas/validationSchema';
-import { IReq, Login } from '../../models';
+import { Response, NextFunction, Request } from 'express';
+import { IReq } from '../../models';
 import { HttpStatusCodes } from '../../constants';
 
 const ajv = new Ajv();
@@ -9,23 +8,27 @@ const addFormats = require("ajv-formats");
 
 addFormats(ajv, ["email"]);
 
-const validation = (schema: object) => {
+const validateAuth = <T>(
+    schema: object,
+    req: IReq<T>,
+    res: Response,
+    next: NextFunction
+) => {
     const validate = ajv.compile(schema);
 
-    return (req: IReq<Login>, res: Response, next: NextFunction) => {
-        if (validate(req.body)) {
-            next();
-        } else {
-            const error = validate.errors;
+    if (validate(req.body)) {
+        next();
+    } else {
+        const error = validate.errors;
 
-            res.status(HttpStatusCodes.BAD_REQUEST).json({ error });
-        }
-    };
-};
+        res.status(HttpStatusCodes.BAD_REQUEST).json({ error });
+    }
+}
 
-const validateSignUp = validation(signupSchema);
+const validateAuthMiddleWare = <T = void>(schema: object) => {
+    return (req: Request, res: Response, next: NextFunction) =>
+        validateAuth<T>(schema, req as Request as IReq<T>, res, next)
+}
 
-const validateLogin = validation(loginSchema);
-
-export { validateSignUp, validateLogin };
+export { validateAuthMiddleWare };
 

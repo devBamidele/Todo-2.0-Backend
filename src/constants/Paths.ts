@@ -18,7 +18,8 @@ export default {
   Auth: {
     Base: '/auth',
     Login: '/login',
+    Validate: '/validate-token',
     SignUp: '/register',
-    refresh: '/refresh'
+    Refresh: '/refresh'
   }
 } as const;

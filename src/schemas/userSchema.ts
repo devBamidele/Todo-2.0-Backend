@@ -3,8 +3,6 @@ import jwt from 'jsonwebtoken';
 import { EnvVars } from "../constants";
 import { User } from "../models";
 
-const secondsInAYear = 365 * 24 * 60 * 60;
-
 const userSchema = new Schema({
   name: { type: String, minlength: 3, maxlength: 50, required: true },
   email: { type: String, unique: true, required: true, lowercase: true },

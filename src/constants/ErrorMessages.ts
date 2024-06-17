@@ -18,7 +18,7 @@ enum ErrorMessages {
     ACCESS_DENIED_NO_TOKEN = "Access denied. No token provided",
 
     /**
-     * Error message indicating access denial due to an invalid authentication token.
+     * Error message indicating access denial due to an invalid token.
      */
     INVALID_TOKEN = "The token provided is invalid",
 
@@ -37,10 +37,22 @@ enum ErrorMessages {
      */
     INVALID_REFRESH_HEADER = "Invalid or missing refresh header",
 
-
+    /**
+     * Error message indicating that the refresh token provided is invalid.
+     */
     INVALID_REFRESH_TOKEN = "The refresh token provided is invalid",
 
-    MISSING_ID = "Id is absent in the refresh token"
+    /**
+     * Error message indicating that the ID is absent in the refresh token.
+     */
+    MISSING_ID = "Id is absent in the refresh token",
+
+    /**
+     * Error message indicating that the email does not match the token.
+     */
+    EMAIL_MISMATCH = "Email does not match token",
+
+    USER_CREATION_FAILED = "Failed to create a user"
 }
 
 export default ErrorMessages;

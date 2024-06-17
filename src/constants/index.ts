@@ -1,4 +1,4 @@
-export { setJwtKey, setRefreshToken, setConnectionUri, default as EnvVars } from "./EnvVars";
+export { setJwtKey, setRefreshToken, setConnectionUri, setClientID, setClientSecret, default as EnvVars } from "./EnvVars";
 
 export { default as ErrorMessages } from "./ErrorMessages";
 

@@ -1,15 +1,15 @@
 
 // **** Functions **** //
 
-import { Request, Response } from "express";
+import { Request, Response, json } from "express";
 import AuthService from "../services/AuthService";
-import { IReq, IUser, Login } from "../models/interfaces";
+import { GToken, IReq, IUser, Login, Register } from "../models/interfaces";
 import { HttpStatusCodes } from "../constants";
 
 /**
  * Register a user
  */
-async function signUp(_: Request, res: Response) {
+async function signUp(_: IReq<Register>, res: Response) {
     const result = await AuthService.registerUser(_);
     return res.status(HttpStatusCodes.OK).json(result);
 }
@@ -28,6 +28,15 @@ async function login(_: IReq<Login>, res: Response) {
         });
 }
 
+async function verifyGoogleToken(_: IReq<GToken>, res: Response) {
+    const { token, refresh } = await AuthService.verifyGoogleToken(_);
+
+    return res.status(HttpStatusCodes.OK)
+        .header('auth', token)
+        .header('refresh', refresh)
+        .json({ message: "Login successful" });
+}
+
 /*
  * Refresh the access token
  */
@@ -42,4 +51,5 @@ export default {
     signUp,
     login,
     refresh,
+    verifyGoogleToken,
 } as const;

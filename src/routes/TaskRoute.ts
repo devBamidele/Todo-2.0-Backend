@@ -1,5 +1,5 @@
 import TaskController from "../controllers/TaskController";
-import { NextFunction, Request, Response, Router } from "express";
+import { Router } from "express";
 import { validateAdd, validateTokenMiddleWare, validateUpdate } from "../middleware";
 import { Paths } from "../constants";
 import { Todo, UpdateTodo } from "../models";

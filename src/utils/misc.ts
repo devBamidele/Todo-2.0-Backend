@@ -21,6 +21,8 @@ export const getCode = (): Verify => {
     }
 }
 
+export const getRandomPassword = (): string => (Math.random() + 1).toString(36).substring(2);
+
 // Type guard function to check if an object conforms to IUser interface
 export function isIUser(obj: any): obj is IUser {
     return (

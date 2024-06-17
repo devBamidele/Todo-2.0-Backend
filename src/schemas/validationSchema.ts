@@ -1,12 +1,14 @@
 import { JSONSchemaType } from "ajv"
 import { Register, Login, Todo, UpdateTodo } from "../models";
+import { GToken } from "../models/interfaces";
 
+const email = { type: 'string', format: 'email', minLength: 5, maxLength: 255 } as const;
 
 const signupSchema: JSONSchemaType<Register> = {
     type: 'object',
     properties: {
-        name: { type: 'string', minLength: 5, maxLength: 50, },
-        email: { type: 'string', format: 'email', minLength: 5, maxLength: 255 },
+        name: { type: 'string', minLength: 5, maxLength: 50 },
+        email,
         password: { type: 'string', minLength: 8 }
     },
     required: ['name', 'email', 'password'],
@@ -15,11 +17,20 @@ const signupSchema: JSONSchemaType<Register> = {
 const loginSchema: JSONSchemaType<Login> = {
     type: 'object',
     properties: {
-        email: { type: 'string', format: 'email', minLength: 5, maxLength: 255 },
+        email,
         password: { type: 'string', minLength: 8 }
     },
     required: ['email', 'password'],
 
+}
+
+const GTokenSchema: JSONSchemaType<GToken> = {
+    type: 'object',
+    properties: {
+        idToken: { type: 'string' },
+        email,
+    },
+    required: ['idToken', 'email'],
 }
 
 const addTaskSchema: JSONSchemaType<Todo> = {
@@ -42,4 +53,4 @@ const updateTaskSchema: JSONSchemaType<UpdateTodo> = {
     required: ['_id']
 }
 
-export { signupSchema, loginSchema, addTaskSchema, updateTaskSchema }
+export { signupSchema, loginSchema, addTaskSchema, updateTaskSchema, GTokenSchema }

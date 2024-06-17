@@ -1,4 +1,4 @@
-export { validateSignUp, validateLogin } from '../middleware/auth/validateAuth';
+export { validateAuthMiddleWare } from '../middleware/auth/validateAuth';
 export { validateTokenMiddleWare, validateRefresh } from '../middleware/auth/validateToken';
 export { validateAdd, validateUpdate } from '../middleware/task/validation';
 

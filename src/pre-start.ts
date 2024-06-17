@@ -1,4 +1,5 @@
-import { setConnectionUri, setJwtKey, setRefreshToken } from "./constants";
+import { setClientID, setConnectionUri, setJwtKey, setRefreshToken } from "./constants";
+import { setRedirectUri } from "./constants/EnvVars";
 import { Secrets } from "./models";
 import { logger, openDbConnection } from "./utils";
 
@@ -26,16 +27,22 @@ async function accessSecret(secretName: string) {
 async function initialize() {
     try {
         // Retrieve secrets
-        const [uri, jwtKey, refreshToken] = await Promise.all([
+        const [uri, jwtKey, refreshToken, client_id, client_secret, redirect_uri] = await Promise.all([
             accessSecret(Secrets.uri),
             accessSecret(Secrets.jwt),
-            accessSecret(Secrets.refresh)
+            accessSecret(Secrets.refresh),
+            accessSecret(Secrets.client_Id),
+            accessSecret(Secrets.client_Secret),
+            accessSecret(Secrets.redirect_uri)
         ]);
 
         // Update values
         setConnectionUri(uri);
         setJwtKey(jwtKey);
         setRefreshToken(refreshToken);
+        setClientID(client_id);
+        setClientID(client_secret);
+        setRedirectUri(redirect_uri);
 
     } catch (error) {
         logger.error('Error:', error);
