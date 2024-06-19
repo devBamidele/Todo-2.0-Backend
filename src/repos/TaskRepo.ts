@@ -1,4 +1,4 @@
-import { UpdateTodo, UserId } from "../models";
+import { Subtask, UpdateTodo, UserId } from "../models";
 import TaskModel from "../schemas/taskSchema";
 
 async function getAll(userId: UserId) {
@@ -6,8 +6,8 @@ async function getAll(userId: UserId) {
     return { tasks }
 }
 
-async function addTask(userId: UserId, title: string, description: string | null) {
-    await TaskModel.create({ userId, title, description });
+async function addTask(userId: UserId, title: string, description: string | null, subtasks: Subtask[]) {
+    await TaskModel.create({ userId, title, description, subtasks });
     return { message: 'Task Added Successfully' }
 }
 

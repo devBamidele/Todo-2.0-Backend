@@ -7,23 +7,23 @@ export interface Login {
 }
 
 export interface GToken {
-    idToken : string;
-    email : string;
+    idToken: string;
+    email: string;
 }
 
 export interface GoogleUserInfo {
-    iss: string;             
-    azp?: string;            
-    aud?: string;            
-    sub: string;             
-    email: string;           
-    email_verified: boolean; 
-    name: string;            
-    picture?: string;        
-    given_name: string;      
-    family_name: string;     
-    iat: number;             
-    exp: number;             
+    iss: string;
+    azp?: string;
+    aud?: string;
+    sub: string;
+    email: string;
+    email_verified: boolean;
+    name: string;
+    picture?: string;
+    given_name: string;
+    family_name: string;
+    iat: number;
+    exp: number;
 }
 
 
@@ -43,13 +43,23 @@ export interface Todo {
     _id?: string
     title: string,
     description: string | null,
+    subtasks: Subtask[],
+}
+
+export interface Subtask {
+    _id?: string,
+    task: string | null,
 }
 
 export interface Task extends Document {
     userId: UserId,
     title: string,
     description: string,
+    subtask: {
+        task: string,
+    }[]
 }
+
 
 export interface UpdateTodo {
     _id: string;

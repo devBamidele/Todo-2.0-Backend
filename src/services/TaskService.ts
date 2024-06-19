@@ -7,8 +7,8 @@ async function getAll(req: IReq) {
 }
 
 async function createTask(req: IReq<Todo>) {
-    const { title, description } = req.body;
-    return await TaskRepo.addTask(req.user!.id, title, description);
+    const { title, description, subtasks } = req.body;
+    return await TaskRepo.addTask(req.user!.id, title, description, subtasks);
 }
 
 async function updateTask(req: IReq<UpdateTodo>){

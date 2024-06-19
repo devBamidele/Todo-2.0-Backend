@@ -1,6 +1,5 @@
 import { JSONSchemaType } from "ajv"
-import { Register, Login, Todo, UpdateTodo } from "../models";
-import { GToken } from "../models/interfaces";
+import { Register, Login, Todo, UpdateTodo, GToken, Subtask } from "../models";
 
 const email = { type: 'string', format: 'email', minLength: 5, maxLength: 255 } as const;
 
@@ -33,15 +32,31 @@ const GTokenSchema: JSONSchemaType<GToken> = {
     required: ['idToken', 'email'],
 }
 
+const subtaskSchema: JSONSchemaType<Subtask> = {
+    type: 'object',
+    properties: {
+        _id: { type: 'string', nullable: true },
+        task: { type: 'string', minLength: 3 },
+    },
+    required: ['task'],
+    additionalProperties: false,
+}
+
 const addTaskSchema: JSONSchemaType<Todo> = {
     type: 'object',
     properties: {
         _id: { type: 'string', nullable: true },
         title: { type: 'string', maxLength: 100 },
-        description: { type: 'string' }
+        description: { type: 'string' },
+        subtasks: {
+            type: 'array',
+            items: subtaskSchema,
+        },
     },
-    required: ['title']
+    required: ['title'],
+    additionalProperties: false,
 }
+
 
 const updateTaskSchema: JSONSchemaType<UpdateTodo> = {
     type: 'object',
