@@ -17,14 +17,14 @@ const validateToken = <T>(
 
     if (!token) return res
         .status(HttpStatusCodes.UNAUTHORIZED)
-        .send(ErrorMessages.ACCESS_DENIED_NO_TOKEN);
+        .json({error: ErrorMessages.ACCESS_DENIED_NO_TOKEN});
 
 
     jwt.verify(token, EnvVars.Jwt.key, (err, decoded) => {
         if (err) {
             return res
                 .status(HttpStatusCodes.UNAUTHORIZED)
-                .send(ErrorMessages.INVALID_TOKEN);
+                .json({error: ErrorMessages.INVALID_TOKEN});
         }
 
         if (!isIUser(decoded)) {
@@ -47,14 +47,13 @@ const validateRefresh = (
 
     if (!refresh) return res
         .status(HttpStatusCodes.BAD_REQUEST)
-        .send(ErrorMessages.INVALID_REFRESH_HEADER)
-
+        .json({ error: ErrorMessages.INVALID_REFRESH_HEADER });
 
     jwt.verify(refresh, EnvVars.Jwt.Refresh, (err, decoded) => {
         if (err) {
             return res
                 .status(HttpStatusCodes.UNAUTHORIZED)
-                .send(ErrorMessages.INVALID_REFRESH_TOKEN);
+                .json({ error: ErrorMessages.INVALID_REFRESH_TOKEN });
         }
 
         if (!isIUser(decoded)) {
@@ -65,8 +64,9 @@ const validateRefresh = (
         req.body = refresh;
 
         next();
-    })
+    });
 }
+
 
 // Higher-order function to create middleware
 const validateTokenMiddleWare = <T = void>() => {
