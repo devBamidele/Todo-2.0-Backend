@@ -1,8 +1,8 @@
 // index.ts
 
 // Exporting types and interfaces
-export { Login, Register, Verify, Todo, Task, User, IUser, IReq, UpdateTodo, GToken, Subtask } from './interfaces';
+export { Login, Register, Verify, Todo, Task, User, IUser, IReq, UpdateTodo, GToken, Subtask, SubTask2 } from './interfaces';
 
-export { UserId } from './types'
+export { Id } from './types'
 
 export { Secrets } from './enums';

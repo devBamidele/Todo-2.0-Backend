@@ -19,7 +19,7 @@ taskRouter.post(Paths.Task.Load, [validateTokenMiddleWare<Todo[]>()], TaskContro
 
 taskRouter.patch(Paths.Task.Update, [validateUpdate, validateTokenMiddleWare<UpdateTodo>()], TaskController.update);
 
-taskRouter.delete(Paths.Task.Delete, validateTokenMiddleWare(), TaskController.remove);
+taskRouter.delete(Paths.Task.Delete, [validateAdd, validateTokenMiddleWare()], TaskController.remove);
 
 
 // **** Export default **** //

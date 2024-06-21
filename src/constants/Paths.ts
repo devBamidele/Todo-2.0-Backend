@@ -11,7 +11,7 @@ export default {
     Get: '/:id',
     Add: '/add',
     Update: '/update',
-    Delete: '/:id',
+    Delete: '/delete/:id',
     Load: '/load'
   },
 

@@ -2,7 +2,7 @@ import bcrypt from 'bcrypt';
 import UserRepo from "../repos/UserRepo";
 import { RequestError } from "../other/classes";
 import Refresh from "../schemas/refreshSchema";
-import { IReq, IUser, Login, Register, UserId } from "../models";
+import { IReq, IUser, Login, Register, Id } from "../models";
 import { EnvVars, ErrorMessages, HttpStatusCodes } from "../constants";
 import { getToken } from "../schemas/userSchema";
 import { GToken, GoogleUserInfo } from "../models/interfaces";
@@ -109,7 +109,7 @@ async function verifyGoogleToken(req: IReq<GToken>) {
     }
 }
 
-async function verifyRefreshToken(userId: UserId, token: string): Promise<boolean> {
+async function verifyRefreshToken(userId: Id, token: string): Promise<boolean> {
     const rshHashes = await Refresh.find({ userId });
 
     for (const refresh of rshHashes) {

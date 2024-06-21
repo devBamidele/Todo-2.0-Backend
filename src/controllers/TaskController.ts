@@ -3,7 +3,7 @@ import { IReq, Todo, UpdateTodo } from "../models/interfaces";
 import TaskService from "../services/TaskService";
 import { HttpStatusCodes } from "../constants";
 import TaskModel from "../schemas/taskSchema";
-import { UserId } from "../models";
+import { Id } from "../models";
 
 
 async function getAll(_: IReq, res: Response) {
@@ -25,19 +25,19 @@ async function update(_: IReq<UpdateTodo>, res: Response) {
     return res.status(HttpStatusCodes.OK).json(result);
 }
 
-async function remove(_: IReq<Todo>, res: Response) {
-
+async function remove(_: IReq, res: Response) {
+    const result = await TaskService.removeTask(_);
+    return res.status(HttpStatusCodes.OK).json(result);
 }
 
 async function addAll(_: IReq<Todo[]>, res: Response) {
 
-    const userId: UserId = _.user!.id;
+    const userId: Id = _.user!.id;
 
     const tasksWithUserId = _.body.map(task => ({ ...task, userId }));
 
     const addedTasks = await TaskModel.insertMany(tasksWithUserId);
     res.status(201).json({ message: 'Tasks added successfully' });
-
 }
 
 

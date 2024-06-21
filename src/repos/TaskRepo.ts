@@ -1,17 +1,16 @@
-import { Subtask, UpdateTodo, UserId } from "../models";
+import { Subtask, UpdateTodo, Id } from "../models";
 import TaskModel from "../schemas/taskSchema";
 
-async function getAll(userId: UserId) {
+async function getAll(userId: Id) {
     const tasks = await TaskModel.find({ userId }).select(' -userId -__v');
     return { tasks }
 }
 
-async function addTask(userId: UserId, title: string, description: string | null, subtasks: Subtask[]) {
+async function addTask(userId: Id, title: string, description: string | null, subtasks: Subtask[]) {
     await TaskModel.create({ userId, title, description, subtasks });
     return { message: 'Task Added Successfully' }
 }
 
-// Update task function
 async function updateTask(task: UpdateTodo) {
     const { _id, ...updateFields } = task;
 
@@ -28,4 +27,16 @@ async function updateTask(task: UpdateTodo) {
     return { message: 'Task Updated Successfully' };
 }
 
-export default { addTask, getAll, updateTask } as const
+async function deleteTask(_id: string) {
+
+    const result = await TaskModel.deleteOne({ _id });
+
+    if (result.deletedCount === 0) {
+        return new Error("Task not found");
+    }
+
+    return { message: 'Task deleted successfully' };
+        
+}
+
+export default { addTask, getAll, updateTask, deleteTask } as const

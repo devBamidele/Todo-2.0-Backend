@@ -1,9 +1,9 @@
 
 // **** Functions **** //
 
-import { Request, Response, json } from "express";
+import { Response } from "express";
 import AuthService from "../services/AuthService";
-import { GToken, IReq, IUser, Login, Register } from "../models/interfaces";
+import { GToken, IReq, Login, Register } from "../models/interfaces";
 import { HttpStatusCodes } from "../constants";
 
 /**

@@ -1,5 +1,5 @@
 import { Request } from 'express';
-import { UserId } from './types';
+import { Id } from './types';
 
 export interface Login {
     email: string;
@@ -26,7 +26,6 @@ export interface GoogleUserInfo {
     exp: number;
 }
 
-
 export interface Register {
     name: string;
     email: string;
@@ -51,21 +50,25 @@ export interface Subtask {
     task: string | null,
 }
 
+export interface SubTask2 {
+    _id : string,
+    task: string,
+}
+
 export interface Task extends Document {
-    userId: UserId,
+    userId: Id,
     title: string,
     description: string,
-    subtask: {
-        task: string,
-    }[]
+    subtasks: SubTask2[]
 }
-
 
 export interface UpdateTodo {
-    _id: string;
-    title?: string;
-    description?: string;
+    _id: string,
+    title?: string,
+    description?: string,
+    subtasks? : SubTask2[]
 }
+
 
 export interface User extends Document {
     name: string,
@@ -77,7 +80,7 @@ export interface User extends Document {
 }
 
 export interface IUser {
-    id: UserId,
+    id: Id,
     name: string,
     email: string,
 }

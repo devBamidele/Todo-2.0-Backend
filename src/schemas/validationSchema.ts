@@ -1,5 +1,5 @@
 import { JSONSchemaType } from "ajv"
-import { Register, Login, Todo, UpdateTodo, GToken, Subtask } from "../models";
+import { Register, Login, Todo, UpdateTodo, GToken, Subtask, Id, SubTask2 } from "../models";
 
 const email = { type: 'string', format: 'email', minLength: 5, maxLength: 255 } as const;
 
@@ -57,15 +57,39 @@ const addTaskSchema: JSONSchemaType<Todo> = {
     additionalProperties: false,
 }
 
+const updateSubTaskSchema: JSONSchemaType<SubTask2> = {
+    type: 'object',
+    properties: {
+        _id: { type: 'string' },
+        task: { type: 'string', minLength: 3 },
+    },
+    required: ['task', '_id'],
+    additionalProperties: false,
+}
 
 const updateTaskSchema: JSONSchemaType<UpdateTodo> = {
     type: 'object',
     properties: {
         _id: { type: 'string' },
         title: { type: 'string', maxLength: 100, nullable: true },
-        description: { type: 'string', nullable: true }
+        description: { type: 'string', nullable: true },
+        subtasks: {
+            type: 'array',
+            nullable: true,
+            items: updateSubTaskSchema,
+        }
     },
     required: ['_id']
 }
 
-export { signupSchema, loginSchema, addTaskSchema, updateTaskSchema, GTokenSchema }
+const deleteSchema: JSONSchemaType<{ id: string }> = {
+    type: 'object',
+    properties: {
+        id: { type: 'string', pattern: '^[0-9a-fA-F]{24}$' }
+    },
+    required: ['id'],
+    additionalProperties: false
+};
+
+
+export { signupSchema, loginSchema, addTaskSchema, updateTaskSchema, GTokenSchema,deleteSchema }

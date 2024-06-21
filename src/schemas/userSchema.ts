@@ -16,13 +16,13 @@ userSchema.index({ email: 1 }, { unique: true, collation: { locale: 'en', streng
 userSchema.methods.generateToken = function () {
   const { id, name, email } = this;
 
-  return getToken({ id, name, email}, '5m');
+  return getToken({ id, name, email }, '20m');
 }
 
 userSchema.methods.generateRefresh = function () {
   const { id, name, email } = this;
 
-  return getToken({ id, name, email}, '7d', true);
+  return getToken({ id, name, email }, '7d', true);
 }
 
 export const getToken = (payload: object, expiresIn: string, isRefresh?: boolean) => {
