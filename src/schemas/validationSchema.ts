@@ -48,6 +48,7 @@ const addTaskSchema: JSONSchemaType<Todo> = {
         _id: { type: 'string', nullable: true },
         title: { type: 'string', maxLength: 100 },
         description: { type: 'string' },
+        due_date: { type: 'string', format: 'date-time', nullable: true },
         subtasks: {
             type: 'array',
             items: subtaskSchema,
@@ -55,7 +56,7 @@ const addTaskSchema: JSONSchemaType<Todo> = {
     },
     required: ['title'],
     additionalProperties: false,
-}
+};
 
 const updateSubTaskSchema: JSONSchemaType<SubTask2> = {
     type: 'object',
@@ -73,6 +74,7 @@ const updateTaskSchema: JSONSchemaType<UpdateTodo> = {
         _id: { type: 'string' },
         title: { type: 'string', maxLength: 100, nullable: true },
         description: { type: 'string', nullable: true },
+        due_date: { type: 'string', format: 'date-time', nullable: true },
         subtasks: {
             type: 'array',
             nullable: true,
@@ -92,4 +94,4 @@ const deleteSchema: JSONSchemaType<{ id: string }> = {
 };
 
 
-export { signupSchema, loginSchema, addTaskSchema, updateTaskSchema, GTokenSchema,deleteSchema }
+export { signupSchema, loginSchema, addTaskSchema, updateTaskSchema, GTokenSchema, deleteSchema }

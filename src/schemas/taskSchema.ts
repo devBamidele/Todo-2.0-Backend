@@ -10,6 +10,7 @@ const taskSchema = new Schema({
     userId: { type: mongoose.Types.ObjectId, required: true },
     title: { type: String, required: true, maxlength: 100 },
     description: { type: String, default: null },
+    due_date: { type: Date, required: false }, 
     subtasks: [subTaskSchema]
 });
 

@@ -42,6 +42,7 @@ export interface Todo {
     _id?: string
     title: string,
     description: string | null,
+    due_date?: string,
     subtasks: Subtask[],
 }
 
@@ -66,7 +67,8 @@ export interface UpdateTodo {
     _id: string,
     title?: string,
     description?: string,
-    subtasks? : SubTask2[]
+    subtasks? : SubTask2[],
+    due_date?: string,
 }
 
 

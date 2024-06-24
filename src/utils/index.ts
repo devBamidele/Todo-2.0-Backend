@@ -6,4 +6,4 @@ export { openDbConnection, closeDbConnection, } from "./db";
 
 export { sendEmail } from "./mailer";
 
-export { getCode, isIUser, getRandomPassword } from "./misc"
+export { getCode, isIUser, getRandomPassword, ensureValidSubtaskIds } from "./misc"

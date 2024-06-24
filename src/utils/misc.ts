@@ -1,4 +1,5 @@
 import { IUser, Verify } from "../models/interfaces";
+import mongoose from 'mongoose';
 
 
 function getDuration(minutes = 0, hours = 0): Date {
@@ -32,3 +33,17 @@ export function isIUser(obj: any): obj is IUser {
         'email' in obj
     );
 }
+
+
+/**
+ * Helper function to ensure all subtasks have valid ObjectId.
+ * If _id is not a valid ObjectId, assigns a new mongoose.Types.ObjectId().
+ * @param subtasks Array of subtasks to validate and possibly update.
+ */
+export const ensureValidSubtaskIds = (subtasks: any[]) => {
+    for (let subtask of subtasks) {
+        if (!mongoose.Types.ObjectId.isValid(subtask._id)) {
+            subtask._id = new mongoose.Types.ObjectId();
+        }
+    }
+};

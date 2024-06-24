@@ -6,8 +6,8 @@ async function getAll(userId: Id) {
     return { tasks }
 }
 
-async function addTask(userId: Id, title: string, description: string | null, subtasks: Subtask[]) {
-    await TaskModel.create({ userId, title, description, subtasks });
+async function addTask(userId: Id, title: string, description: string | null, subtasks: Subtask[], due_date: Date | null) {
+    await TaskModel.create({ userId, title, description, subtasks, due_date });
     return { message: 'Task Added Successfully' }
 }
 
