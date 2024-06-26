@@ -1,5 +1,6 @@
 import { JSONSchemaType } from "ajv"
 import { Register, Login, Todo, UpdateTodo, GToken, Subtask, Id, SubTask2 } from "../models";
+import { UpdateTodoData } from "../models/interfaces";
 
 const email = { type: 'string', format: 'email', minLength: 5, maxLength: 255 } as const;
 
@@ -68,7 +69,7 @@ const updateSubTaskSchema: JSONSchemaType<SubTask2> = {
     additionalProperties: false,
 }
 
-const updateTaskSchema: JSONSchemaType<UpdateTodo> = {
+const updateTaskSchema: JSONSchemaType<UpdateTodoData> = {
     type: 'object',
     properties: {
         _id: { type: 'string' },
@@ -84,6 +85,11 @@ const updateTaskSchema: JSONSchemaType<UpdateTodo> = {
     required: ['_id']
 }
 
+const updateTaskArraySchema: JSONSchemaType<UpdateTodoData[]> = {
+    type: 'array',
+    items: updateTaskSchema,
+};
+
 const deleteSchema: JSONSchemaType<{ id: string }> = {
     type: 'object',
     properties: {
@@ -94,4 +100,4 @@ const deleteSchema: JSONSchemaType<{ id: string }> = {
 };
 
 
-export { signupSchema, loginSchema, addTaskSchema, updateTaskSchema, GTokenSchema, deleteSchema }
+export { signupSchema, loginSchema, addTaskSchema, updateTaskArraySchema, updateTaskSchema, GTokenSchema, deleteSchema }

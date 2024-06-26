@@ -25,8 +25,8 @@ async function createTask(req: IReq<Todo>) {
 }
 
 
-async function updateTask(req: IReq<UpdateTodo>) {
-    return await TaskRepo.updateTask(req.body);
+async function updateTasks(req: IReq<UpdateTodo>) {
+    return await TaskRepo.updateTasks(req.body);
 }
 
 async function removeTask(req: IReq) {
@@ -37,6 +37,6 @@ async function removeTask(req: IReq) {
 export default {
     getAll,
     createTask,
-    updateTask,
+    updateTasks,
     removeTask,
 }

@@ -21,7 +21,7 @@ async function add(_: IReq<Todo>, res: Response) {
 }
 
 async function update(_: IReq<UpdateTodo>, res: Response) {
-    const result = await TaskService.updateTask(_);
+    const result = await TaskService.updateTasks(_);
     return res.status(HttpStatusCodes.OK).json(result);
 }
 

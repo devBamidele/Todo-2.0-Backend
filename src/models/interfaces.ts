@@ -52,7 +52,7 @@ export interface Subtask {
 }
 
 export interface SubTask2 {
-    _id : string,
+    _id: string,
     task: string,
 }
 
@@ -64,13 +64,15 @@ export interface Task extends Document {
 }
 
 export interface UpdateTodo {
+    data: UpdateTodoData[]
+}
+export interface UpdateTodoData {
     _id: string,
     title?: string,
     description?: string,
-    subtasks? : SubTask2[],
+    subtasks?: SubTask2[],
     due_date?: string,
 }
-
 
 export interface User extends Document {
     name: string,

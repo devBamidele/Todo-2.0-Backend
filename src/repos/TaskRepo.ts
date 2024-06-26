@@ -11,20 +11,23 @@ async function addTask(userId: Id, title: string, description: string | null, su
     return { message: 'Task Added Successfully' }
 }
 
-async function updateTask(task: UpdateTodo) {
-    const { _id, ...updateFields } = task;
+async function updateTasks(tasks: UpdateTodo) {
+    const updateOperations = tasks.data.map(({ _id, ...updateFields }) => ({
+        updateOne: {
+            filter: { _id },
+            update: { $set: updateFields },
+            upsert: false, // Set to true if you want to upsert (insert if not exists)
+            runValidators: true,
+        }
+    }));
 
-    const result = await TaskModel.updateOne(
-        { _id },
-        { $set: updateFields },
-        { runValidators: true }
-    );
+    const results = await TaskModel.bulkWrite(updateOperations);
 
-    if (result.modifiedCount === 0) {
-        throw new Error('No task found to update or no changes made');
+    if (!results?.isOk) {
+        throw new Error('No tasks found to update or no changes made');
     }
 
-    return { message: 'Task Updated Successfully' };
+    return { message: 'Tasks Updated Successfully' };
 }
 
 async function deleteTask(_id: string) {
@@ -39,4 +42,4 @@ async function deleteTask(_id: string) {
         
 }
 
-export default { addTask, getAll, updateTask, deleteTask } as const
+export default { addTask, getAll, updateTasks, deleteTask } as const
